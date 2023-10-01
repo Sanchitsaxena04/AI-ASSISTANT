@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>🗣️Vocalia🎙️</title>
+  </head>
+  <body>
+
+    <style>
+          body {
+        background-image: url('https://img.pikbest.com/backgrounds/20200512/abstract-black-background-with-square-purple-and-blue-frame-luxury-futuristic-technology-v_1761876jpg!w700wp'); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+        #assistant-container {
+            
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin: 20px auto; /* Center the container horizontally */
+        }
+
+        #user-input {
+            background-color: #333;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        #microphone-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #start,
+        #stop{
+            background-color: #007acc;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+
+        #microphone-button:hover,
+        #stop-microphone-button:hover {
+            background-color: #005b91;
+        }
+
+      .chats{
+       align-items:flex-start;
+        flex-direction:column;
+        
+      }
+
+      hr{
+        margin-left: 0;
+        margin-right: 0;
+        background-color: wheat;
+        width: 100%;
+      }
+
+      #welcome{
+        color:gray;
+      }
+      #response{
+        color:gray;
+        text-align:center;
+      }
+
+
+
+
+      .loading-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.loading-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #007acc;
+  border-radius: 50%;
+  margin: 0 6px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+      
+
+    </style>
+
+
+
+  
+
+
+
+    
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Vocalia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 id= "welcome" class= "text-center my-2 py-2">Welcome to Vocalia - Your AI Chat Assistant</h1>
+
+     <div class="container mt-4">
+        <div id="assistant-container">
+
+            <div id="microphone-buttons">
+                <button id="start" title="Start Voice Assistant">&#128222; 
+              
+                </button>
+                 
+             
+                <button id="stop" title="Stop Voice Assistant">&#9724;</button>
+
+              
+            </div>
+        </div>
+    </div>
+
+    <div class= "container chats" >
+      <h3 id="response">CHATBOX</h3>
+
+
+      
+  
+
+      <div id="loading-message" style="display: none;">
+        <p>Loading data</p>
+        <div class="loading-dots">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
+      </div>
+      
+     <!-- <div>Question: This is your question</div> -->
+      <!-- <div>Answer: This is your answer</div> -->  
+
+      <hr>
+    </div>
+
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script>
+
+      
+/*This function is designed to facilitate communication between the client-side (front-end) code and the
+server-side (back-end) code for generating AI responses using the OpenAI API.
+*/
+   const populateUsingGPT = (input)=>{
+        
+  /*(1)Making HTTP POST REQUEST /api endpoint that we have made in order to interact with the server.js.
+  It sends a request to the "/api" endpoint, which is defined in "server.js" (the server-side code).*/
+  
+  /*(2)The request includes a JSON object in its body, which consists of a key-value pair: "input" as the key,
+  and the input parameter (representing the user's query or input) as the value..*/
+  
+  /*(3).then((data) => { console.log(data.message); }):This section defines a callback function that gets executed
+  when the POST request to the server is completed, and a response is received.
+  
+     (a)data represents the response data from the server, which includes the AI-generated response.
+     (b)console.log(data.message); logs the 'message' property from the response data to the browser's console.
+     This allows you to see the AI's response in the console.
+   
+   */
+  postData("/api", { input: input }).then((data) => {
+  console.log(data.message); 
+
+    
+  document.querySelector(".chats").innerHTML = document.querySelector(".chats").innerHTML + 
+    ` 
+      <div>Question: ${input}</div> 
+      <br>
+       <div>Answer: ${data.message}</div> 
+
+  <hr>`
+    });
+      }
+
+   
+      /* initializes a variable speech to true.This variable may be used to control the state of speech recognition,
+      indicating whether it's currently active.*/                 
+      let speech = true;
+      //globalTranscript will be used to store the transcribed speech input.
+      let globalTranscript;
+      /* This line checks if the SpeechRecognition API is supported by the browser. The Web Speech API provides
+       speech recognition functionality. It checks for both the standard SpeechRecognition and the older
+       webkitSpeechRecognition for compatibility with various browsers. */
+      window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      /*: This line creates a new instance of the SpeechRecognition object, which is used for speech recognition.
+      This object is responsible for recognizing and transcribing speech input.
+      NOTE: TRANSCRIBE MEANS-> to record thoughts, speech or data in a written form.
+      */
+      const recognition = new SpeechRecognition();
+      /*This line sets the interimResults property of the recognition object to true. When set to true,
+      interim results (partial transcriptions of speech) are returned during recognition, not just the final result.
+      This allows you to capture and process speech input as it's spoken.*/
+      recognition.interimResults = true;
+
+      /* This code adds an event listener to the recognition object.The 'result' event is triggered when the speech
+      recognition process yields results.
+        (1)Inside the event listener, e represents the event object, which contains information about the
+        recognition results.
+        (2)The code extracts the transcribed speech from the e.results array, maps the results to obtain the
+        transcribed text, and then joins them into a single transcript string.
+        (3)The transcript is assigned to the globalTranscript variable. This allows you to keep track of the
+        continuously updated speech input.*/
+      recognition.addEventListener('result', e =>{
+        const transcript = Array.from(e.results) //speech extraction into the transcript constant in the form of text
+        .map(result =>  result[0])
+        .map(result => result.transcript)
+        .join('')
+
+        globalTranscript = transcript
+        
+      });
+//creating a constant and saving the html "Loading" element in it.
+  const loadingMessage = document.getElementById('loading-message'); 
+  //function to show the loading message as soon as the start micophone button is clicked.
+function showLoadingMessage() {
+loadingMessage.style.display = 'block';
+ }
+
+//startloadingdots function to enable the bouncing dots effect as soon as the stop microphone button is clicked.
+const stopButton =  document.getElementById('stop');
+function StartLoadingDots() {
+    const loadingDots = document.querySelectorAll('.loading-dot');
+    loadingDots.forEach(dot => {
+        dot.style.animation = 'bounce 1s infinite';
+    });
+}
+
+//startloadingdots function to disable the bouncing dots as soon as the stop microphone button is clicked.
+function clearLoadingDots() {
+    const loadingDots = document.querySelectorAll('.loading-dot');
+    loadingDots.forEach(dot => {
+        dot.style.animation = 'none';
+    });
+}
+
+//event listener for stop microphone button
+stopButton.addEventListener("click", ()=>{
+  recognition.abort();
+  clearLoadingDots();
+  document.querySelector('.chats').innerHTML += '<div class= "text-center my-2 py-2" >Feel free to Start a new conversation if you need any assistance Bye!</div>';
+  document.querySelector('.chats').innerHTML += '<br><br> <hr></hr> '
+  console.log("stop button clicked")
+})
+
+
+//event listener when the start microphone button is clicked
+/*(1)The speech variable appears to control whether the speech recognition process is currently active.
+     If speech is true, it proceeds with speech recognition.
+  (2)The code adds an event listener for the 'end' event of the recognition process.
+  This event is triggered when the recognition process is complete or has ended.
+  (3)Inside the 'end' event listener:
+         (a)It logs the globalTranscript variable to the console. globalTranscript is where the transcribed
+            speech input is stored.
+         (b)It checks if globalTranscript is not an empty string. If there is something in globalTranscript,
+            it proceeds to the next steps.
+            
+   (4)If globalTranscript is not empty: It calls the populateUsingGPT function, which takes globalTranscript as
+    input. This function is responsible for sending the user's voice input to the server for further processing
+    using the OpenAI API.
+    (5)After processing the user's input, it clears the globalTranscript variable by setting it to an empty string.
+    This ensures that the response is only displayed once after the first request is made.*/
+   
+start.addEventListener("click", ()=>{
+  if (speech == true) {
+  StartLoadingDots(); 
+  recognition.start();
+  
+  recognition.addEventListener('end', ()=>{
+   
+   console.log(globalTranscript)
+   
+    if(globalTranscript !== ""){        // when there is something in globaltranscript then only populate the values 
+       // Show the loading message
+       showLoadingMessage();    //showing the loading message in the UI.   
+       populateUsingGPT(globalTranscript)
+            }
+           
+            
+    globalTranscript=""            //making globaltranscript empty inorder to make sure that the response is only diplayed once after the first request is made.
+    
+  }); 
+  
+ 
+}
+});
+
+
+/*(1)async function postData(url = "", data = {}): This defines an asynchronous function named postData that accepts
+two parameters:
+
+(a)url: The URL to which the HTTP POST request will be sent. The default value is an empty string, but it should
+        be provided with the target URL when calling this function.
+(b)data: An object that contains the data you want to include in the POST request's body. It is expected to be
+         provided in JSON format.
+         Inside the function, it uses the fetch API to make an HTTP POST request to the specified url.
+  
+ (2)Inside the function, it uses the fetch API to make an HTTP POST request to the specified url.
+
+ The options for the fetch function are set as follows:
+
+(a)method: "POST": Specifies that this is a POST request.
+(b)mode: "cors": Indicates that the request is made in a "cross-origin" context, allowing it to access
+          resources from different domains.
+(c)cache: "no-cache": Ensures that the response is not cached by the browser.
+(d)credentials: "same-origin": Indicates that the request includes credentials, but only when the request is
+                 made to the same origin. This is useful for same-origin requests.
+(e)headers: Sets the request's headers. In this case, it specifies that the request's body is in JSON format by
+             setting the "Content-Type" header to "application/json."
+(f)redirect: "follow": Instructs the browser to follow any redirects that may occur in response to this request.
+(g)referrerPolicy: "no-referrer": Specifies that the referrer information should not be included in the request headers.
+(h)body: JSON.stringify(data): The data object is converted to a JSON string and used as the request body.
+         This is where you typically include the data you want to send to the server for processing.
+
+  */
+async function postData(url = "", data = {}) {
+  
+  const response = await fetch(url, {
+    method: "POST", 
+    mode: "cors",
+    cache: "no-cache", 
+    credentials: "same-origin", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow", 
+    referrerPolicy: "no-referrer", 
+    body: JSON.stringify(data),
+  });
+  return response.json(); 
+}
+
+
+    </script>
+  </body>
+  
+</html>
